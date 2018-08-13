@@ -5,6 +5,12 @@ import matplotlib.pyplot as plt
 import statsmodels.tsa.arima_model as arima
 import statsmodels.api as sm
 
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()
+
 df = pd.read_csv('data_weather copy.csv', index_col='Time', parse_dates=True)
 
 df.drop(labels=['index'], axis=1, inplace=True)
