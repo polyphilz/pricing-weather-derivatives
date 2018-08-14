@@ -5,9 +5,10 @@ import statsmodels.api as sm
 import statsmodels.tsa.arima_model as arima
 
 def initial_plot(df):
+    plt.figure(num=1, figsize=(12, 6))
     plt.plot(df['mean'], color='#3D9970', linewidth=0.5)
     plt.title('Mean Temperature in Fahrenheit from 2010-2018')
-    plt.xlabel('Time (Days)')
+    plt.xlabel('Time')
     plt.ylabel('Mean Temperature (˚F)')
     plt.savefig('plots/initial_plot.svg', dpi=200)
     plt.savefig('plots/initial_plot.png', dpi=200)
