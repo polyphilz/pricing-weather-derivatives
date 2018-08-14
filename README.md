@@ -1,3 +1,3 @@
 ## Pricing Weather Derivatives
 
-<img src="initial_plot.svg" width="100%" height="544">
+<img src="plots/initial_plot.svg" width="100%" height="544">
