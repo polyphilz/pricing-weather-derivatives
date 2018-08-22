@@ -7,7 +7,7 @@
 4. Future Work
 
 ## Introduction
-#### Background
+### Background
 Despite great advances in technology over the years, we humans remain unable to control many forces of Mother Nature, weather being one of them. Weather affects everyone and has not only a prominent role from an environmental standpoint, but also from a business one. In fact, it is estimated that nearly 20% of the U.S. economy is affected by the weather, including industries ranging from obvious ones like agriculture and energy to less transparents ones like entertainment and travel. As former commerce secretary William Daley stated in a 1998 testimony to Congress, "Weather is not just an environmental issue, it is a major economic factor. At least $1 trillion of our economy is weather-sensitive."
 
 Weather risk is incredibly unique. It's localized, can't be modified or controlled and still cannot be precisely and consistently predicted. Until recently, there weren't many financial instruments corporations could use to hedge against weather risk. Typically, insurance has been the go-to tool for protection against weather conditions, but it has one big problem: it only provides protection against calamitous disasters. It doesn't have the capability to protect against slight changes in weather that can still have adverse profitability consequences. And thus, in the late 1990s, the weather derivative was born.
@@ -59,7 +59,7 @@ Looking at our plot, we can see that the temperature data almost resembles a sin
 Augmented Dickey-Fuller Unit Root Tests are used to test the stationarity of data. Passing in `df["mean"]`, we get the following output:
 <img src="plots/adf.png" width="100%" height="134">
 
-The key statistic there is the p-value. 
+The key statistic here is the p-value. Roughly speaking, if the p-value is less than 0.05, we can make the assumption that our data is stationarity. 
 
 ##### Plotting the correlation and autocorrelation charts
 <Insert info about plotting these two charts>
