@@ -53,7 +53,7 @@ After figuring out we wanted to use an ARIMA model, the next step was to break t
 - Use the model to make predictions
 
 #### Visualizing our time series data with an initial plot
-<img src="plots/initial_plot.svg" width="100%" height="400">
+<img src="plots/initial_plot.svg" width="100%" height="500">
 
 #### Making our data stationary
 <Insert info about making data stationary using Augmented Dicky-Fuller Unit Root Test>
