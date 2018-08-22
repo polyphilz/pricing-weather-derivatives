@@ -57,7 +57,7 @@ Looking at our plot, we can see that the temperature data almost resembles a sin
 
 ##### Making our data stationary
 Augmented Dickey-Fuller Unit Root Tests are used to test the stationarity of data. Passing in `df["mean"]`, we get the following output:
-<img src="plots/adf.png" width="100%" height="250">
+<img src="plots/adf.png" width="100%" height="150">
 
 ##### Plotting the correlation and autocorrelation charts
 <Insert info about plotting these two charts>
