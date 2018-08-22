@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 
 
@@ -46,7 +47,12 @@ def process_data(df):
 
 
 def main():
-    df = pd.read_csv("temp_data_raw.csv", index_col="Time", parse_dates=True)
+    try:
+        df = pd.read_csv("temp_data_raw.csv", index_col="Time", parse_dates=True)
+    except:
+        print("Please run `scrape_data.py` to generate the raw data first.")
+        sys.exit(0)
+
     df.drop(df.columns[df.columns.str.contains("Unnamed")], axis=1, inplace=True)
 
     grouped = process_data(df)
