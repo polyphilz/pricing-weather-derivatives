@@ -15,30 +15,18 @@ Weather risk is incredibly unique. It's localized, can't be modified or controll
 Weather derivatives come in multiple flavors; common underlyings include rainfall or temperature (we'll be pricing these). The general structure of a weather derivative with a temperature (˚F) underlying is relatively simple: weather is quantified and indexed in terms of monthly or seasonal average temperatures. Following that, a dollar amount is then attached to each index value, and this package is traded on an exchange (we'll be looking at weather futures trading on the Chicago Mercantile Exchange, or CME).
 
 #### Measuring Index Values
-There are two concepts that must be introduced: Heating Degree Days (HDD) and Cooling Degree Days (CDD).
+Weather contracts on U.S. cities are tied to an index of heating degree day (HDD) or cooling degree day (CDD) values. Both are calculated according to how many degrees a day’s average temperature varies from a baseline of 65° F, where the average temperature is based on the maximum and minimum temperature of the given day.
 
-Ben, please introduce these. Consider using the copy pasted text below
+An HDD value equals the number of degrees the day's average temperature is lower than 65° F. For example, a day's average temperature of 40° F would give you an HDD value of 25 (65 - 40). If the temperature exceeded 65° F, the value of the HDD would be zero. This is because in theory there would be no need for heating on a day warmer than 65°, and this index is often used for winter months.
 
-An HDD value equals the number of degrees the day's average temperature is lower than 65° F. For example, a day's average temperature of 40° F would give you an HDD value of 25 (65 - 40). If the temperature exceeded 65° F, the value of the HDD would be zero. This is because in theory there would be no need for heating on a day warmer than 65°.
+A CDD value equals the number of degrees an average daily temperature exceeds 65° F. For example, a day's average temperature of 80° F would give you a daily CDD value of 15 (80 - 65). If the temperature were lower than 65° F, the value of the CDD would be zero. Again, remember that in theory there would be no need for air conditioning if the temperature were less than 65°F, and thus this index is typically used for summer months.
 
-A CDD value equals the number of degrees an average daily temperature exceeds 65° F. For example, a day's average temperature of 80° F would give you a daily CDD value of 15 (80 - 65). If the temperature were lower than 65° F, the value of the CDD would be zero. Again, remember that in theory there would be no need for air conditioning if the temperature were less than 65°F.
+These index values can then be aggregated over a given time period. Thus, a monthly HDD or CDD index value is simply the sum of all daily HDD or CDD values recorded that month. Let it be noted that HDD and CDD values must be positive, as all negatives are simply recorded as 0. For weather derivatives, an expected total HDD or CDD is established for the relevant time period. The party that will benefit more will be the one that successfully predicts whether the actual value will be above or below the index. Therefore, the accuracy of the temperature model is the key component to achieving profit.
 
-For European cities, CME's weather futures for the HDD months are calculated according to how much the day's average temperature is lower than 18° Celsius. However CME weather futures for the summer months in European cities are based not on the CDD index but on an index of accumulated temperatures, the cumulative average temperature (CAT).
+The contract price can be determined by multiplying the expected HDD or CDD value by a specified tick size. The tick size is simply a dollar amount per HDD or CDD and can vary based on how much money the parties are looking to exchange. For example, the value of a CME weather futures contract is determined by multiplying the monthly HDD or CDD value by a tick size of $20. In the example above, the CME November weather contract would settle at $4,160 ($20 x 208 = $4,160).
 
-Measuring Monthly Index Values
-A monthly HDD or CDD index value is simply the sum of all daily HDD or CDD values recorded that month. And seasonal HDD and CDD values are the accumulated values for the winter or summer months. For example, if there were 10 HDD daily values recorded in Novemer 2004 in Chicago, the Nov 2004 HDD index would be the sum of the 10 daily values. Thus, if the HDD values for the month were 25, 15, 20, 25, 18, 22, 20, 19, 21 and 23, the monthly HDD index value would be 208.
-
-The value of a CME weather futures contract is determined by multiplying the monthly HDD or CDD value by $20. In the example above, the CME November weather contract would settle at $4,160 ($20 x 208 = $4,160).
-
-#### Conclusion of Introduction (not sure what to call this? but basically like a why did we do this proj)
-Who Uses Weather Futures?
-Current users of weather futures are primarily companies in energy-related businesses. However, there is growing awareness and signs of potential growth in the trading of weather futures among agricultural firms, restaurants and companies involved in tourism and travel. Many OTC weather derivative traders also trade CME Weather futures for purposes of hedging their OTC transactions.
-
-The advantages of these products are becoming increasingly known: The trading volume of CME weather futures in 2003 more than quadrupled from the previous year, totaling roughly $1.6 billion in notional value, and the momentum of this volume continues to increase.
-
-The risks businesses face due to weather are somewhat unique. Weather conditions tend to affect volume and usage more than they directly affect price. An exceptionally warm winter, for example, can leave utility and energy companies with excess supplies of oil or natural gas (because people need less to heat their homes). Or an exceptionally cold summer can leave hotel and airline seats empty. Although the prices may change somewhat as a consequence of unusually high or low demand, price adjustments don't necessarily compensate for lost revenues resulting from unseasonable temperatures.
-
-In 1997, the first over-the-counter (OTC) weather derivative trade took place, and the field of weather risk management was born. According to Valerie Cooper, former executive director of the Weather Risk Management Association, an $8 billion weather derivatives industry developed within a few years of its inception.
+#### Why this Project?
+According to the former executive director of the Weather Risk Management Association, Valerie Cooper, an $8 billion weather derivatives industry developed within a few years of its inception. While current users of the derivative are primarily energy-related companies, there has been increased interest from agricultural firms, restaurants and tourism/travel companies. This can be seen in the numbers: The volume of traded CME weather futures in 2003 more than quadrupled from 2002, totaling roughly $1.6 billion in notional value. The momentum of this volume continues to increase as well.
 
 ## Approach & Methodology
 
