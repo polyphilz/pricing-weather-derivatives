@@ -1,12 +1,12 @@
 # Pricing Weather Derivatives
 
-### Contents
+## Contents
 1. Introduction
 2. Approach & Methodology
 3. Results
 4. Future Work
 
-### Introduction
+## Introduction
 #### Background
 Despite great advances in technology over the years, we humans remain unable to control many forces of Mother Nature, weather being one of them. Weather affects everyone and has not only a prominent role from an environmental standpoint, but also from a business one. In fact, it is estimated that nearly 20% of the U.S. economy is affected by the weather, including industries ranging from obvious ones like agriculture and energy to less transparents ones like entertainment and travel. As former commerce secretary William Daley stated in a 1998 testimony to Congress, "Weather is not just an environmental issue, it is a major economic factor. At least $1 trillion of our economy is weather-sensitive."
 
@@ -40,7 +40,7 @@ The risks businesses face due to weather are somewhat unique. Weather conditions
 
 In 1997, the first over-the-counter (OTC) weather derivative trade took place, and the field of weather risk management was born. According to Valerie Cooper, former executive director of the Weather Risk Management Association, an $8 billion weather derivatives industry developed within a few years of its inception.
 
-### Approach & Methodology
+## Approach & Methodology
 <Insert info about data collection>
 <Insert info about data processing and cleaning>
 <Insert rationale for model choice (ARIMA)>
@@ -52,23 +52,23 @@ After figuring out we wanted to use an ARIMA model, the next step was to break t
 - Construct the ARIMA model
 - Use the model to make predictions
 
-##### Visualizing our time series data with an initial plot
+#### Visualizing our time series data with an initial plot
 <img src="plots/initial_plot.svg" width="100%" height="400">
 
-##### Making our data stationary
+#### Making our data stationary
 <Insert info about making data stationary using Augmented Dicky-Fuller Unit Root Test>
 
-##### Plotting the correlation and autocorrelation charts
+#### Plotting the correlation and autocorrelation charts
 <Insert info about plotting these two charts>
 
-##### Constructing the ARIMA model
+#### Constructing the ARIMA model
 <Insert info about constructing the ARIMA model>
 
-##### Forecasting
+#### Forecasting
 <Insert info about using the model to make predictions>
 
-### Results
+## Results
 <Insert results info>
 
-### Future Work
+## Future Work
 <Insert future work info>
