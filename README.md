@@ -41,8 +41,14 @@ The risks businesses face due to weather are somewhat unique. Weather conditions
 In 1997, the first over-the-counter (OTC) weather derivative trade took place, and the field of weather risk management was born. According to Valerie Cooper, former executive director of the Weather Risk Management Association, an $8 billion weather derivatives industry developed within a few years of its inception.
 
 ## Approach & Methodology
-<Insert info about data collection>
+
+#### Data Collection
+We used a service called Wunderground - a "commercial weather service providing real-time weather information via the Internet" - to gather data. Within the `scrape_data.py` file
+
+#### Data Processing and Cleansing
 <Insert info about data processing and cleaning>
+
+#### ARIMA Model
 <Insert rationale for model choice (ARIMA)>
 
 After figuring out we wanted to use an ARIMA model, the next step was to break that down further. The general process for ARIMA models is the following:
@@ -52,19 +58,19 @@ After figuring out we wanted to use an ARIMA model, the next step was to break t
 - Construct the ARIMA model
 - Use the model to make predictions
 
-#### Visualizing our time series data with an initial plot
+##### Visualizing our time series data with an initial plot
 <img src="plots/initial_plot.svg" width="100%" height="500">
 
-#### Making our data stationary
+##### Making our data stationary
 <Insert info about making data stationary using Augmented Dicky-Fuller Unit Root Test>
 
-#### Plotting the correlation and autocorrelation charts
+##### Plotting the correlation and autocorrelation charts
 <Insert info about plotting these two charts>
 
-#### Constructing the ARIMA model
+##### Constructing the ARIMA model
 <Insert info about constructing the ARIMA model>
 
-#### Forecasting
+##### Forecasting
 <Insert info about using the model to make predictions>
 
 ## Results
