@@ -32,6 +32,7 @@ According to the former executive director of the Weather Risk Management Associ
 
 ### Usage
 Shiny app: https://shalini-s.shinyapps.io/weather-app/
+- Model futures or options by seting a specific contract range and risk value (tick)
 
 Alternatively, if you want to use the code yourself, run in the following order:
 - `$ python scrape_data.py`
@@ -51,10 +52,11 @@ Using pandas, aggregation was done by day reducing the total number of observati
 ### ARIMA Model
 We have time series data, and a popular model used to forecast time series data is the autoregressive integrated moving average model, or ARIMA for short. At a high level, an ARIMA model makes use of past data to model the existing data as well as to make predictions of future behavior.
 
-Breaking down the process of using an ARIMA model further, we have to:
+Breaking down the process of determining an accurate ARIMA model to fit the data, we have to:
 - Visualize the time series data
 - Test the time series data for stationarity
 - Plot the autocorrelation and partial autocorrelation charts
+- Determine if seasonality or differencing would improve the model
 - Construct the ARIMA model
 - Use the model to make predictions
 
@@ -72,10 +74,15 @@ The key statistic here is the p-value. Roughly speaking, if the p-value is less 
 #### Plotting the autocorrelation and partial autocorrelation charts
 <img src="plots/acf_pacf_plot.svg" width="100%" height="450">
 
-Using a lags of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation.
+Using a maximum lag of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation. This indicates that both AR and MA terms will be required in the model. An eacf chart was examined in order to determine the exact orders. This plot showed significant lags at (1,2), (1,1), and (4,0). Each of these models were tested, and the model with the smallest AIC value was selected. 
+
+#### Determining if seasonality or differencing is required
+Next, the model was examined and other methods of making the model more accurate were analyzed. The data was differenced once and was determined to still be stationary (by ADF testing). The eacf chart of the differenced data was computed and each of the resulting models was compared through AIC values to determine the optimal model. To make sure that we were not overfitting the model, the standard deviation of both models was calculated. The sd of the differenced model was less than the sd of the original model, which does not indicate overfitting. Furthermore, the lag-1 autocorrelation of the model was greater than -0.5, which also does not indicate overfitting. 
+
+To account for global warming, a seasonal difference was tested. The seasonal difference was determined to be stationary, and the same procedure from above was applied to avoid overfitting. The frequency of the seasonality was determined to be 365, which indicates a comparison between the temperature at a specific date and the temperature at that same date during each year in the data. The eacf of the seasonally differenced data was computed and no terms were determined to be significant.
 
 #### Constructing the ARIMA model
-Given the seasonality of our data, we used the `SARIMAX` functionality from the statsmodels library in Python and the standard ARIMA in our R script. p, d and q values for the order were 1, 1 and 2 respectively and P, D, Q and frequency values for the seasonal order were 0, 1, 0 and 365 respectively. These values were picked using the `eacf` functionality in R. After deriving them with R, they were hard-coded into the Python model.
+Given the seasonality of our data, we used the `SARIMAX` functionality from the statsmodels library in Python and the standard ARIMA in our R script. From the analysis above, the p, d and q values for the order were 1, 1 and 2 respectively and P, D, Q and frequency values for the seasonal order were 0, 1, 0 and 365 respectively. These values were picked using the `eacf` functionality in R. After deriving them with R, they were hard-coded into the Python model.
 
 Furthermore, R was used for a forecast over all the existing data as well as one year into the future. While this functionality was added to the Python model in the form of imported csv files (`forecasted_existing.csv` and `forecasted_unknown_1y.csv`) retrieved from the R model, `SARIMAX` can't handle daily period lags very well and does better with monthly or quarterly data. As a result, the `.predict` methods cause the program to crash because there isn't enough RAM to do computations on so many dense arrays, and there is currently no seasonal ARIMA version in Python that uses sparse arrays for the same purpose (statespace models are optimized for smaller arrays using dense LAPACK functions). Perhaps it would work on a computer with 32GB or 64GB of RAM, but this hasn't been tested at the time of writing.
 
@@ -98,4 +105,8 @@ Using a hypothetical scenario, let's say the month is currently November in 2018
 The contract range for this option is December 1st, 2018 - December 30th, 2018. It's trading on the CME which means the tick size is $20 ($20 per index value) and the strike price is listed as $340. Using our model and forecasting into the future, our output for the predicted heating degree days reads 353.06880466589. As a result, we can make the assumption that this option should cost us $261.38 ((353.06880466589 - 340) * $20). Please note that this number does not factor in the optionality aspect of the contract; in reality, the premium would be slightly higher. If the listed price is below this number, there's an arbitrage opportunity. If it's at the number or over, the ideal strategy would be to construct a distribution of the probability of various payoffs and use that, combined with our risk tolerance, to make a decision on whether we should buy the option or not.
 
 ## Future Work
+<<<<<<< HEAD
 This project is ongoing as opportunities for future work remain. Currently, our pricing method is not complete for options. Although the intrinsic value is factored in to our premium, we haven't considered the time value of the contract or the volatility, two key factors in determining the price for an option premium. Furthermore, we may look at alternative modeling approaches other than our current ARIMA model. A cubic spline interpolation on three dimensional data (years, days, temperature) prior to an ARMA process may be more accurate as it can smooth the global warming effect across years. Additionally, using more than our chosen 8 years of data will help improve model robustness and yield a more accurate result. Finally, a distribution of potential payouts could be constructed to help the investor determine whether the contract fits in the desired risk profile. Finding the probability of payouts given our predicted CDD and HDD values can be more useful than simply returning the fair price of the derivative.
+=======
+This project is ongoing as opportunities for future work remain. Currently, our pricing method is only applicable to futures, but could be built to accommodate options as well. That is, the price would have to reflect that the buyer has the right but not the obligation to buy or sell the underlying asset at an agreed-upon price. Furthermore, we may look at alternative modeling approaches other than our current ARIMA model. A cubic spline interpolation on three dimensional data (years, days, temperature) prior to an ARMA process may be more accurate as it can smooth the global warming effect across years. Additionally, using more than our chosen 8 years of data will help improve model robustness and yield a more accurate result. Finally, a distribution of potential payouts could be constructed to help the investor determine whether the contract fits in the desired risk profile. Finding the probability of payouts given our predicted CDD and HDD values can be more useful than simply returning the fair price of the derivative.
+>>>>>>> 6164fcfcffc05a9e7a4ad26973efad0a3f8c2b1c
