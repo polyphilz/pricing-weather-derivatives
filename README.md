@@ -34,9 +34,9 @@ According to the former executive director of the Weather Risk Management Associ
 Check out the Shiny app: https://shalini-s.shinyapps.io/weather-app/
 
 Alternatively, if you want to use the code yourself, run in the following order:
-- `scrape_data.py`
-- `clean_data.py`
-- `avg_temperature_model.py` or `avg_temperature_model.R`
+- `$ python scrape_data.py`
+- `$ python clean_data.py`
+- `$ python avg_temperature_model.py` or `avg_temperature_model.R` in RStudio
 
 ### Data Collection
 We used a service called Wunderground - a "commercial weather service providing real-time weather information via the Internet" - to gather data. Using a web scraper (please see `scrape_data.py`) that was fortunately already developed by someone else specifically for this purpose, we harvested 8 years worth of temperature data ranging from July 30th, 2010 to July 30th, 2018. The data was derived from the "KCASANFR49" weather station, a small station situated in the Mission District within San Francisco (this goes back to the previous point in the Introduction stating that weather data is localized). We could have passed in other stations to use as well, but for the purposes of this demonstration, we just stuck to one station within San Francisco. Some undesirable characteristics of the data were that it:
