@@ -81,8 +81,8 @@ def acf_pacf_plot(df):
     acf_pacf_plot = plot_acf(df["mean"].dropna(), lags=30, color="#3D9970", ax=ax1)
     ax2 = acf_pacf_plot.add_subplot(212)
     acf_pacf_plot = plot_pacf(df["mean"].dropna(), lags=30, color="#3D9970", ax=ax2)
-    plt.savefig("plots/sfd_acf_pacf.svg", dpi=200, figure=acf_pacf_plot)
-    plt.savefig("plots/sfd_acf_pacf.png", dpi=200, figure=acf_pacf_plot)
+    plt.savefig("plots/acf_pacf_plot.svg", dpi=200, figure=acf_pacf_plot)
+    plt.savefig("plots/acf_pacf_plot.png", dpi=200, figure=acf_pacf_plot)
 
 
 def model(df, period):
