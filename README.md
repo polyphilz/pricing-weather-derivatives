@@ -32,6 +32,7 @@ According to the former executive director of the Weather Risk Management Associ
 
 ### Usage
 Shiny app: https://shalini-s.shinyapps.io/weather-app/
+- can choose to model futures or options, and set a specific contract range, and risk value (tick)
 
 Alternatively, if you want to use the code yourself, run in the following order:
 - `$ python scrape_data.py`
@@ -51,10 +52,11 @@ Using pandas, aggregation was done by day reducing the total number of observati
 ### ARIMA Model
 We have time series data, and a popular model used to forecast time series data is the autoregressive integrated moving average model, or ARIMA for short. At a high level, an ARIMA model makes use of past data to model the existing data as well as to make predictions of future behavior.
 
-Breaking down the process of using an ARIMA model further, we have to:
+Breaking down the process of determining an accurate ARIMA model to fit the data, we have to:
 - Visualize the time series data
 - Test the time series data for stationarity
 - Plot the autocorrelation and partial autocorrelation charts
+- Determine if seasonality or differencing would improve the model
 - Construct the ARIMA model
 - Use the model to make predictions
 
@@ -72,10 +74,16 @@ The key statistic here is the p-value. Roughly speaking, if the p-value is less 
 #### Plotting the autocorrelation and partial autocorrelation charts
 <img src="plots/acf_pacf_plot.svg" width="100%" height="450">
 
-Using a lags of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation.
+Using a maximum lag of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation. This indicates that both AR and MA terms will be required in the model. An eacf chart was examined in order to determine the exact orders. This plot showed significant lags at (1,2), (1,1), and (4,0). Each of these models were tested, and the model with the smallest AIC value was selected. 
+
+#### Determining if seasonality or differencing is required
+
+Next, the model was examined and other methods of making the model more accurate were analyzed. The data was differenced once and was determined to still be stationary (by ADF testing). The eacf chart of the differenced data was computed and each of the resulting models was compared through AIC values to determine the optimal model. To make sure that we were not overfitting the model, the standard deviation of both models was calculated. The sd of the differenced model was less than the sd of the original model, which does not indicate overfitting. Furthermore, the lag-1 autocorrelation of the model was greater than -0.5, which also does not indicate overfitting. 
+
+To account for global warming, a seasonal difference was tested. The seasonal difference was determined to be stationary, and the same procedure from above was applied to avoid overfitting. The frequency of the seasonality was determined to be 365, which indicates a comparison between the temperature at a specific date and the temperature at that same date during each year in the data. The eacf of the seasonally differenced data was computed and no terms were determined to be significant.
 
 #### Constructing the ARIMA model
-Given the seasonality of our data, we used the `SARIMAX` functionality from the statsmodels library in Python and the standard ARIMA in our R script. p, d and q values for the order were 1, 1 and 2 respectively and P, D, Q and frequency values for the seasonal order were 0, 1, 0 and 365 respectively. These values were picked using the `eacf` functionality in R. After deriving them with R, they were hard-coded into the Python model.
+Given the seasonality of our data, we used the `SARIMAX` functionality from the statsmodels library in Python and the standard ARIMA in our R script. From the analysis above, the p, d and q values for the order were 1, 1 and 2 respectively and P, D, Q and frequency values for the seasonal order were 0, 1, 0 and 365 respectively. These values were picked using the `eacf` functionality in R. After deriving them with R, they were hard-coded into the Python model.
 
 Furthermore, R was used for a forecast over all the existing data as well as one year into the future. While this functionality was added to the Python model in the form of imported csv files (`forecasted_existing.csv` and `forecasted_unknown_1y.csv`) retrieved from the R model, `SARIMAX` can't handle daily period lags very well and does better with monthly or quarterly data. As a result, the `.predict` methods cause the program to crash because there isn't enough RAM to do computations on so many dense arrays, and there is currently no seasonal ARIMA version in Python that uses sparse arrays for the same purpose (statespace models are optimized for smaller arrays using dense LAPACK functions). Perhaps it would work on a computer with 32GB or 64GB of RAM, but this hasn't been tested at the time of writing.
 
