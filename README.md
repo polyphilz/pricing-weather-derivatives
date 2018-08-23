@@ -25,10 +25,18 @@ These index values can then be aggregated over a given time period. Thus, a mont
 
 The contract price of the future can be determined by multiplying the expected HDD or CDD value by a specified tick size. The tick size is simply a dollar amount per HDD or CDD and can vary based on how much money the parties are looking to exchange. For example, the value of a CME weather futures contract is determined by multiplying the monthly HDD or CDD value by a tick size of $20.
 
-### Why this Project?
-According to the former executive director of the Weather Risk Management Association, Valerie Cooper, an $8 billion weather derivatives industry developed within a few years of its inception. While current users of the derivative are primarily energy-related companies, there has been increased interest from agricultural firms, restaurants and tourism/travel companies. This can be seen in the numbers: The volume of traded CME weather futures in 2003 more than quadrupled from 2002, totaling roughly $1.6 billion in notional value. The momentum of this volume continues to increase as well.
+### Motivation
+According to the former executive director of the Weather Risk Management Association, Valerie Cooper, an $8 billion weather derivatives industry developed within a few years of its inception. While current users of the derivative are primarily energy-related companies, there has been increased interest from agricultural firms, restaurants and tourism/travel companies. This can be seen in the numbers: The volume of traded CME weather futures in 2003 more than quadrupled from 2002, totaling roughly $1.6 billion in notional value. The momentum of this volume continues to increase as well, meaning we should expect to see continued growth and interest in this exotic derivative.
 
 ## Approach & Methodology
+
+### Usage
+Check out the Shiny app: https://shalini-s.shinyapps.io/weather-app/
+
+Alternatively, if you want to use the code yourself, run in the following order:
+- `scrape_data.py`
+- `clean_data.py`
+- `avg_temperature_model.py` or `avg_temperature_model.R`
 
 ### Data Collection
 We used a service called Wunderground - a "commercial weather service providing real-time weather information via the Internet" - to gather data. Using a web scraper (please see `scrape_data.py`) that was fortunately already developed by someone else specifically for this purpose, we harvested 8 years worth of temperature data ranging from July 30th, 2010 to July 30th, 2018. The data was derived from the "KCASANFR49" weather station, a small station situated in the Mission District within San Francisco (this goes back to the previous point in the Introduction stating that weather data is localized). We could have passed in other stations to use as well, but for the purposes of this demonstration, we just stuck to one station within San Francisco. Some undesirable characteristics of the data were that it:
@@ -64,8 +72,10 @@ The key statistic here is the p-value. Roughly speaking, if the p-value is less 
 #### Plotting the autocorrelation and partial autocorrelation charts
 <img src="plots/acf_pacf_plot.svg" width="100%" height="450">
 
+Using a lags of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation.
+
 #### Constructing the ARIMA model
-<Insert info about constructing the ARIMA model>
+We used the 
 
 #### Forecasting
 <Insert info about using the model to make predictions>
