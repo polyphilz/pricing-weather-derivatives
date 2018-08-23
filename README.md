@@ -51,7 +51,7 @@ Breaking down the process of using an ARIMA model further, we have to:
 - Use the model to make predictions
 
 #### Visualizing our time series data with an initial plot
-<img src="plots/initial_plot.svg" width="100%" height="600">
+<img src="plots/initial_plot.svg" width="100%" height="450">
 
 Looking at our plot, we can see that the temperature data almost resembles a sinusoid. This is due to the four seasons taking on a cyclical pattern. From an initial glance, the data appears to have little to no trend component and be stationary, but this still has to be tested.
 
@@ -62,7 +62,7 @@ Augmented Dickey-Fuller (ADF) Unit Root Tests are used to test the stationarity 
 The key statistic here is the p-value. Roughly speaking, if the p-value is less than 0.05, we can make the assumption that our data is stationary. In this case, it is. In the `avg_temperature_model.py` code, we do indeed do some additional differencing and run the ADF test on `df["Seasonal First Difference"]` but we don't end up using this when fitting our model so it can be ignored.
 
 #### Plotting the autocorrelation and partial autocorrelation charts
-<img src="plots/acf_pacf_plot.svg" width="100%" height="600">
+<img src="plots/acf_pacf_plot.svg" width="100%" height="450">
 
 #### Constructing the ARIMA model
 <Insert info about constructing the ARIMA model>
