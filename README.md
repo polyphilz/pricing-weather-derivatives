@@ -93,9 +93,11 @@ Forecast for the next year (July 31st, 2018 - July 31st, 2019)
 <img src="plots/predict_unknown_values_plot.svg" width="100%" height="450">
 
 ## Results
-Using a hypothetical scenario, let's say the month is currently November in 2018 and we think the temperature in December is going to be particularly low. We are a farmer and are worried that low temperatures will cause more of our crops to die on average than usual, resulting in a decrease in profitability for the month. We would like the hedge this risk by purchasing a call option on a heating degree days derivative.
+Using a hypothetical scenario, let's say the month is currently November in 2018 and we think the temperature in December is going to be particularly low. We are a farmer and are worried that low temperatures will cause more of our crops to die on average than usual, resulting in a decrease in profitability for the month. We would like to hedge this risk by purchasing a call option on a heating degree days derivative.
 
-The contract range for this option is December 1st, 2018 - December 30th, 2018. It's trading on the CME which means the tick size is $20 ($20 per index value) and the strike price is listed as 340. Using our model and forecasting into the future, our output for the predicted heating degree days reads 353.06880466589. As a result, we can make the assumption that this option should cost us $261.38 ((353.06880466589 - 340) * $20). If the listed price is below this number, there's an arbitrage opportunity. If it's at the number of over, the ideal strategy would be to construct a distribution of the probability of various payoffs and use that, combined with our risk tolerance, to make a decision on whether we should buy or not.
+The contract range for this option is December 1st, 2018 - December 30th, 2018. It's trading on the CME which means the tick size is $20 ($20 per index value) and the strike price is listed as 340. Using our model and forecasting into the future, our output for the predicted heating degree days reads 353.06880466589. As a result, we can make the assumption that this option should cost us $261.38 ((353.06880466589 - 340) * $20). If the listed price is below this number, there's an arbitrage opportunity. If it's at the number or over, the ideal strategy would be to construct a distribution of the probability of various payoffs and use that, combined with our risk tolerance, to make a decision on whether we should buy the option or not.
 
 ## Future Work
-<Insert future work info>
+- Cubic spline interpolation on three dimensional data (years, days, temperature (˚F)) to smooth global warming effect across years
+- Use more than 8 years of data to improve model robustness
+- Construct a distribution of potential payoffs rather than returning an absolute number that's just the price of the derivative
