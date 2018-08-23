@@ -75,13 +75,23 @@ The key statistic here is the p-value. Roughly speaking, if the p-value is less 
 Using a lags of 30, we see that we have a gradual, downward-sloping autocorrelation and a sharp drop-off in the partial autocorrelation.
 
 #### Constructing the ARIMA model
-We used the 
+Given the seasonality of our data, we used the `SARIMAX` functionality from the statsmodels library in Python and the standard ARIMA in our R script. p, d and q values for the order were 1, 1 and 2 respectively and P, D, Q and frequency values for the seasonal order were 0, 1, 0 and 365 respectively. These values were picked using the eacf functionality in R. After deriving them with R, they were hardcoded into the Python model.
+
+Furthermore, R was used for a forecast over all the existing data as well as one year into the future. While this functionality was added to the Python model in the form of imported csv files (`forecasted_existing.csv` and `forecasted_unknown_1y.csv`) retrieved from the R model, `SARIMAX` can't handle daily period lags very well and does better with monthly or quarterly data. As a result, the `.predict` methods cause the program to crash because there isn't enough RAM to do computations on so many dense arrays, and there is currently no seasonal ARIMA version in Python that uses sparse arrays for the same purpose (statespace models are optimized for smaller arrays using dense LAPACK functions). Perhaps it would work on a computer with 32GB or 64GB of RAM, but this hasn't been tested at the time of writing.
 
 #### Forecasting
-<Insert info about using the model to make predictions>
+Forecast across existing time values:
+<img src="plots/predict_existing_values_plot.svg" width="100%" height="450">
+
+Forecast for the next year (July 31st, 2018 - July 31st, 2019)
+<img src="plots/predict_unknown_values_plot.svg" width="100%" height="450">
 
 ## Results
-<Insert results info>
+Residual plot from our model on existing data:
+<img src="plots/resids_plot1.svg" width="100%" height="450">
+
+Residual plot showing kernel density estimation:
+<img src="plots/resids_plot2.svg" width="100%" height="450">
 
 ## Future Work
 <Insert future work info>
