@@ -31,7 +31,7 @@ According to the former executive director of the Weather Risk Management Associ
 ## Approach & Methodology
 
 ### Usage
-Check out the Shiny app: https://shalini-s.shinyapps.io/weather-app/
+Shiny app: https://shalini-s.shinyapps.io/weather-app/
 
 Alternatively, if you want to use the code yourself, run in the following order:
 - `$ python scrape_data.py`
